@@ -1,4 +1,4 @@
-/*
+
 package com.project.coches.exceptions;
 
 import jakarta.servlet.ServletException;
@@ -18,4 +18,4 @@ public class AccessDeniedHandlerException implements AccessDeniedHandler {
 
     }
 }
-*/
+

@@ -27,11 +27,6 @@ public class CustomerController {
         return ResponseEntity.of(iCustomerService.getCustomerById(cardId));
     }
 
-    //Responde con un ResponseCustomerDTOPass que contiene el password generado aleatoriamente
-    @PostMapping
-    public ResponseEntity<ResponseCustomerDTOPass> saveCustomer(@RequestBody CustomerDTO newCustomerDTO) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(iCustomerService.saveCustomer(newCustomerDTO));
-    }
 
     @PatchMapping
     public ResponseEntity<CustomerDTO> update(@RequestBody CustomerDTO customerDTOUpdate) {

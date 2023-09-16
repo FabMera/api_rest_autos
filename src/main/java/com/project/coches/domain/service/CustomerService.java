@@ -5,6 +5,7 @@ import com.project.coches.domain.dtos.ResponseCustomerDTOPass;
 import com.project.coches.domain.repository.ICustomerRepository;
 import com.project.coches.domain.useCase.ICustomerService;
 import com.project.coches.exceptions.EmailValidationException;
+import com.project.coches.security.Roles;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +18,7 @@ import java.util.Optional;
 public class CustomerService implements ICustomerService {
 
     private final ICustomerRepository iCustomerRepository;
-    private String expresionRegular = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
+
     @Override
     public List<CustomerDTO> getAllCustomers() {
         return iCustomerRepository.getAllCustomers();
@@ -36,12 +37,14 @@ public class CustomerService implements ICustomerService {
     @Override
     public ResponseCustomerDTOPass saveCustomer(CustomerDTO newCustomerDTO) {
 
+        String expresionRegular = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
         if (!newCustomerDTO.getEmail().matches(expresionRegular)) {
             throw new EmailValidationException();
         }
         String pass = generateRandomPassword(8);
         newCustomerDTO.setPassword(pass);
         newCustomerDTO.setActive(1);
+        newCustomerDTO.setRol(Roles.CUSTOMER);
         iCustomerRepository.saveCustomer(newCustomerDTO);
         return new ResponseCustomerDTOPass(pass);
     }
