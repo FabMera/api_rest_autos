@@ -6,6 +6,7 @@ import com.project.coches.domain.dtos.JwtResponseDTO;
 import com.project.coches.domain.dtos.ResponseCustomerDTOPass;
 import com.project.coches.domain.useCase.IAuthUseCase;
 import com.project.coches.domain.useCase.ICustomerService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -24,7 +25,7 @@ public class AuthController {
 
     //Responde con un ResponseCustomerDTOPass que contiene el password generado aleatoriamente
     @PostMapping("/register")
-    public ResponseEntity<ResponseCustomerDTOPass> saveCustomer(@RequestBody CustomerDTO newCustomerDTO) {
+    public ResponseEntity<ResponseCustomerDTOPass> saveCustomer(@Valid @RequestBody CustomerDTO newCustomerDTO) {
         return ResponseEntity.status(HttpStatus.CREATED).body(customerService.saveCustomer(newCustomerDTO));
     }
 

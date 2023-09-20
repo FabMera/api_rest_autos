@@ -11,5 +11,5 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ResponseCustomerDTOPass {
 
-    private String password;
+    private String message;
 }

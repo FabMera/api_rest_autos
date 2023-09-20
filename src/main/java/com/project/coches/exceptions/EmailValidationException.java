@@ -3,6 +3,6 @@ package com.project.coches.exceptions;
 public class EmailValidationException extends RuntimeException {
 
     public EmailValidationException() {
-        super("Email is not valid");
+        super("Email no cumple con el formato requerido,debe incluir @ y .");
     }
 }

@@ -3,6 +3,7 @@ package com.project.coches.controller;
 import com.project.coches.domain.dtos.CustomerDTO;
 import com.project.coches.domain.dtos.ResponseCustomerDTOPass;
 import com.project.coches.domain.useCase.ICustomerService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +30,7 @@ public class CustomerController {
 
 
     @PatchMapping
-    public ResponseEntity<CustomerDTO> update(@RequestBody CustomerDTO customerDTOUpdate) {
+    public ResponseEntity<CustomerDTO> update( @Valid @RequestBody CustomerDTO customerDTOUpdate) {
         return ResponseEntity.of(iCustomerService.updateCustomer(customerDTOUpdate));
     }
 

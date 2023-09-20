@@ -36,9 +36,7 @@ public class JWTAuthenticationProvider {
         Date validDate = new Date(date.getTime() + 3600000);
 
         String token = JWT.create()
-                .withClaim("cardId", customerJWT.getCardId())
                 .withClaim("fullname", customerJWT.getFullName())
-                .withClaim("numberCellPhone", String.valueOf(customerJWT.getNumberCellphone()))
                 .withClaim("email", customerJWT.getEmail())
                 .withClaim("rol", customerJWT.getRol())
                 .withIssuedAt(date)

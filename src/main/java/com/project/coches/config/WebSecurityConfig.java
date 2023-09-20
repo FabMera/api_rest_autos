@@ -31,13 +31,13 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.cors(withDefaults()).exceptionHandling().accessDeniedHandler(accessDeniedHandlerException).and().csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
-                .authorizeHttpRequests(req -> req.requestMatchers("/auth/**", "/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**")
-                        .permitAll().requestMatchers(HttpMethod.GET, "/customer/**").hasAnyRole(Roles.CUSTOMER, Roles.ADMIN)
-                        .requestMatchers(HttpMethod.GET, "/cars/**").hasAnyRole(Roles.CUSTOMER, Roles.ADMIN)
-                        .requestMatchers(HttpMethod.DELETE, "/customer/**").hasRole(Roles.ADMIN)
-                        .requestMatchers(HttpMethod.POST, "cars/**").hasRole(Roles.ADMIN)
-                        .requestMatchers(HttpMethod.POST, "customer/**").hasRole(Roles.ADMIN)
-                        .anyRequest().authenticated());
+                .authorizeHttpRequests(req ->
+                        req.requestMatchers("/auth/**", "/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**")
+                                .permitAll().requestMatchers(HttpMethod.GET, "/customer/**").hasAnyRole(Roles.CUSTOMER, Roles.ADMIN)
+                                .requestMatchers(HttpMethod.GET, "/cars/**").hasAnyRole(Roles.CUSTOMER, Roles.ADMIN)
+                                .requestMatchers(HttpMethod.DELETE, "/customer/**").hasRole(Roles.ADMIN)
+                                .requestMatchers(HttpMethod.POST, "/cars/**").hasRole(Roles.ADMIN)
+                                .anyRequest().authenticated());
         return http.build();
     }
 
